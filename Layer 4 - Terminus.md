@@ -105,12 +105,5 @@ where `W_j` is an alignment weight, `L_j` is the cycle length in dimension `j`, 
 ## **6. Resonance & Conclusion**
 The Terminus formalizes the progression from abstract index manipulation → coordinate tallying → dimensional symmetry → multiplicative closure. Every "magic" discovered interactively maps directly to a group-theoretic, combinatorial, or geometric structure. The journey from Origin to Terminus is not a sequence of isolated topics, but a single mathematical object viewed through successive lenses: `S_n` → `ℤ_V` → `ℤ_{V-1}^*` → `Perm_d ⋉ ℤ_2^d`. The interactive layers are the discovery; Terminus is the structure.
 
----
-
-This Terminus specification:
-- Mirrors the interactive journey exactly, section-by-section
-- Formalizes all metaphors with precise algebraic, geometric, and combinatorial language
-- Introduces `MG(V-1)` and the `V-1` boundary as the structural closure, exactly as requested
-- Preserves the pedagogical "magic → theorem" arc without premature exposure
 - Provides a complete mapping table and computational bounds
 - Maintains strict notation consistency with Layers 1–3
