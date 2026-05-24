@@ -85,8 +85,3 @@ Establish the foundational vocabulary of the tutorial: distinguish between abstr
 - Full permutation enumeration capped at `n = 7` (~5,040 elements). Graceful degradation for `n > 7` using cycle-type sampling and order-bound filtering.
 - Runtime warnings trigger at `n ≥ 8`. UI gracefully limits interactive state-space expansion while preserving pedagogical visibility of cycle/power structure.
 - All formulas and outputs use standard mathematical notation. Placeholders clearly marked for UI/JS integration.
-
----
-
-This version strictly enforces your `array` vs `index` distinction, centers the `identity` as the "doorway to reality," integrates motivated real-world mapping examples, corrects the composition pipeline, and isolates Layer 1 to pure 1D permutation structure. 
-
