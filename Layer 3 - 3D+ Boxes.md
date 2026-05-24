@@ -1,7 +1,3 @@
-Here is the complete, refined specification for **Layer 3: 3D & Hyper-Boxes**, fully aligned with your constraints, combinatorial rules, notation system, and Terminus preparation.
-
----
-
 ## **Layer 3: 3D & Hyper-Boxes**
 ### **Goal**
 Generalize to `d`-dimensional boxes via base permutations and the twist operator (`:`), discover extrusion layers formed by shared base-places, verify centroid involution symmetries, and observe the hidden multiplicative structure modulo `V-1` that governs all box indexes.
@@ -80,6 +76,3 @@ For any prime-factor box `(p₁, p₂, ..., pₖ)`, the stride multipliers maint
 - **Striding Validation:** Autogenerates only valid box indexes. Non-coprime bases or mismatched tallies trigger constructive hints about `MG(V-1)` alignment.
 - **UI Scaling:** Factorial box, twist pairing, and momentum metrics dynamically optimize for `a,b,c ≤ 15` without layout collapse.
 
----
-
-This specification honors your exact combinatorial rule (`(d!)^2`), notation system (factorial box + `:` twist), 3D walking/tallying mechanics, fixed-point/symmetry constraints, and Terminus preparation (hidden `MG(V-1)` structure, stride inversion, `V-1` completion). 
