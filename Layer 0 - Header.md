@@ -17,4 +17,3 @@ The key themes of duality and resonance are discovered in the detail of the subj
 The tutorial itself can be seen as dual with its subject matter, 
 and should attempt to "be" resonant with the subject matter, if only for reason of aesthetics and symmetry, 
 but never where that would obscure a simple explanation.
----
