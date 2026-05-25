@@ -1,58 +1,85 @@
-# 🧊 Layer 3: 3D & Hyper-Boxes - Generalization and Structural Patterns
+Here is the complete, refined specification for **Layer 3: 3D & Hyper-Boxes**, fully aligned with your constraints, combinatorial rules, notation system, and Terminus preparation.
 
-**Goal:** To generalize the tilling and symmetry principles from 2D to $d$ dimensions. Students learn how dimensionality adds structural layers (extrusion), discover the general framework of the factorial box, and observe the first mathematical signs of the multiplicative group structure that underlies the entire process.
+---
 
-## 🏗️ I. Generalizing the Space
+## **Layer 3: 3D & Hyper-Boxes**
+### **Goal**
+Generalize to `d`-dimensional boxes via base permutations and the twist operator (`:`), discover extrusion layers formed by shared base-places, verify centroid involution symmetries, and observe the hidden multiplicative structure modulo `V-1` that governs all box indexes.
 
-### 1. Factorial Box and Base Labeling
-The index space is no longer constrained by a single 2D box, but by a product space defined by $V = b_1 \cdot b_2 \cdot ... \cdot b_d$.
-*   **Labeling:** We use the concept of a **truncated factorial box** $\text{|d|...(1)|}$ to map the dimensions. Each column corresponds to a fundamental direction/base stride ($\alpha, \beta, \gamma$, etc.) and its inverse.
-*   **The Compositional Rule:** Base permutations are formed by combining forward and reverse tallies along these axes. The total structure is a combination of these directional movements.
+---
 
-### 2. 3D Walking and Torus Coiling
-*   **Mechanism:** The walking mechanism remains the continuous tilling/tallying process, now constrained by $d$ coupled periodic axes.
-*   **Torus Analogy:** The hyper-box snaps and coils into a $d$-torus. The path is a multi-dimensional helical trajectory, which requires tracking periodicity across all dimensions simultaneously.
+### **Content**
 
-### 3. Shared Base-Places and Extrusion Layers (The Crucial Generalization)
-When applying the twist operator `:` to two base permutations, the relationship between the dimensions dictates the resulting structure:
-*   **Identities:** If all $d$ base-places are shared, the forward and reverse tallies cancel perfectly, resulting in the identity index.
-*   **Pure Directions:** If the base dimensions operate independently, the resulting structure is a simple product of independent cycles.
-*   **Extrusion (Mixed):** If exactly $d-1$ base-places are shared, the resulting index *must* be an **extruded** lower-dimensional index. This manifests visually as the mechanism copying, scaling, or magnifying a 2D structure (the shared base-places) along the new, unused dimension. This is the systematic algebraic link that guarantees that dimension adds structure *by replicating* lower-dimensional geometry.
+#### **1. Factorial Box & Base Permutation Labeling**
+Base permutations are labeled using a truncated factorial box that expands leftward with dimension:
+- **2D Box:** `|2|1|` → columns `↗, e` and `↘`
+- **3D Box:** `|3|2|1|` → columns `α, β, γ` and `↗, ↘, e`
+Each column maps a stride dimension to a base permutation. Expressions combine forward/reverse tallies with base directions:
+- `2D:` `↗:↘ * ↘:↗ = e`
+- `3D:` `α↗:β↘ * γ↘:α↗`
+The `e` label is dropped from base permutations themselves (as it carries no directional stride), but remains on the far right of composition pipelines to anchor displacements to the identity.
 
-### 4. Symmetry and Fixed Points (The Universal Principle)
-The symmetry principles generalize perfectly:
-*   **Fixed Points:** The main diagonal $(x, x, ..., x)$ remains fixed. Furthermore, any face/plane/hyper-plane formed by the shared bases must contribute lines/planes of fixed points that extend along the new dimensions.
-*   **Centroid Involution:** The symmetry operation ($\text{ι}$) is global. The centroid-involuted reflection (reflecting coordinates across the center point $\frac{V-1}{2}$) applies consistently, forcing all cycles to be either self-symmetric or paired reflections.
+#### **2. 3D Walking & Torus Coiling**
+The walking mechanism extends identically to 2D: stride through each dimension according to the base permutation, then apply the twist `:` to pair forward and reverse tallies. 
+- **Torus Analogy:** The flat `a×b×c` grid snaps and coils into a 3-torus. Tallying traces a triple-helical path across three coupled periodic axes. The `:` operator pairs the forward helix with its reverse, creating a closed winding loop.
+- **Visual Insight:** The coiling naturally partitions the box into **layers** based on how many base-places the paired permutations share.
 
-## 🔮 IV. Hidden Structure Teaser (The Climax Build-Up)
+#### **3. Shared Base-Places & Extrusion Layers**
+When pairing base permutations with `:`, three structural cases emerge:
+- **Pure Directions:** No shared base-places. Strides operate independently across axes.
+- **Identities:** All base-places shared. The forward and reverse tallies exactly cancel, yielding the identity index.
+- **Extrusions (Mixed):** Exactly one base-place shared. This automatically extrudes a lower-dimensional index into the new dimension. Visually, this manifests as copying/magnifying a 2D index along the new axis, with labels scaled and spliced into the gaps. The `:` operator generates these extrusions natively.
 
-### 1. Multiplicative Closure (The Predictive Pattern)
-We observe that every base stride $b_j$ must be coprime to $V-1$. This observation signals that all movements are naturally contained within the **multiplicative group** $\text{MG}(V-1) \equiv \mathbb{Z}_{V-1}^*$.
-*   The stride product $s$ acts as a multiplier within this group.
-*   The pair created by the `:` operator consistently maps to mutual inverses in $\text{MG}(V-1)$, a pattern of $s \cdot s^{-1} \equiv 1$.
-*   **The Gap:** The winding path always appears to approach a singular, structural element that completes the set of possible elements modulo $V-1$. This missing, anchoring element must be $\mathbf{V-1}$.
+#### **4. Fixed Points & Centroid Symmetries**
+The twist `:` operator imposes strict geometric constraints:
+- **Guaranteed Fixed Points:** The main diagonal `(x,x,x,...)` is always fixed. Extruded 2D faces contribute lines/planes of fixed points that extend along the new dimensions.
+- **Centroid Involutions:** All cycle symmetries are involutions through the box centroid. Cycles either self-symmetric (opposing points aligned on centroid) or form mirrored pairs where every point’s reflection through the centroid lands on the paired cycle.
+- **Boundary Anchors:** Origin `(0,0,...,0)` and terminus `(a-1,b-1,...,c-1)` remain fixed as tallying endpoints.
 
-### 2. Metrics Scaling
-*   **3D Momentum ($M$):** $\Sigma(\Delta x^2 + \Delta y^2 + \Delta z^2)$. This generalizes energy, showing that the proportionate relationship (e.g., $R=E$ in 2D) holds robustly across dimensions, confirming a unified metric principle.
+#### **5. Hidden Multiplicative Structure (Terminus Preview)**
+Because every base `p` divides `V`, each `p` is coprime to `V-1`, naturally placing them in the multiplicative group `MG(V-1)`. The stride product acts as a multiplier within this group. Pairs under `:` consistently map to mutual inverses in `MG(V-1)`. Cycle closure always points toward a final element that completes the multiplicative set—a structural completion revealed fully in Terminus. This pattern emerges visually as consistent stride inversion and periodic wraparound across all dimensions.
 
-## 🚀 Interactive Elements (The Student Experience)
+#### **6. Distance & Symmetry Metrics**
+- **1D Radiance:** `Σ|jump|` (cycle stave)
+- **2D Energy:** `Σ(Δx² + Δy²)` (squared perimeter)
+- **3D Momentum:** `Σ(Δx² + Δy² + Δz²)` (squared 3D displacement)
+For any prime-factor box `(p₁, p₂, ..., pₖ)`, the stride multipliers maintain constant product relationships across layers, preserving momentum scaling under dimension expansion.
 
-*   `[PLACEHOLDER: 3D Wireframe Explorer]` (Toggle factorizations and highlight shared layers).
-*   `[PLACEHOLDER: Factorial Label Mapper]` (Mapping base permutations to the hyper-box columns).
-*   `[PLACEHOLDER: Twist Layer Generator]` (Visualizing pure/mixed/identity cases and extrusion splicing).
-*   `[PLACEHOLDER: Centroid Symmetry Tracer]` (Overlaying the full centroid involution).
-*   `[PLACEHOLDER: Multiplicative Pattern Detector]` (Tracking inverses and the approach toward $V-1$).
-*   `[PLACEHOLDER: Hyper-Factor Tree]` (Input $V$ and map all possible factorizations).
+---
 
-## 🧩 Puzzle Gate
-1. **Factorial Mapping:** (Identify shared bases and predict extrusion).
-2. **Twist & Layer Identification:** (Categorize resulting indices by structure).
-3. **Symmetry Verification:** (Prove fixed points and involution symmetries).
-4. **Stride Inversion Pattern:** (Observe and predict the terminal inverse element needed to complete the modular set).
-5. **Dimensional Scaling:** (Verify that $V$ is uniquely represented by its prime factors).
+### **Interactive Elements**
+`[PLACEHOLDER: 3D Wireframe Explorer]` Toggle factorizations `(2,4,5) ↔ (10,4) ↔ (2,2,2,5)`. Highlight extrusion layers and shared base-places. Animate coiling onto 3-torus.
+`[PLACEHOLDER: Factorial Label Mapper]` Drag base permutations into `|3|2|1|` box. See column alignment. Preview `:` pairing and direction labeling.
+`[PLACEHOLDER: Twist Layer Generator]` Apply `:` to pairs of base permutations. Visualize pure/mixed/identity cases. Show extrusion splicing and magnification.
+`[PLACEHOLDER: Centroid Symmetry Tracer]` Overlay cycles. Toggle centroid inversion visualization. Highlight diagonal fixed points and extruded fixed planes/lines.
+`[PLACEHOLDER: Multiplicative Pattern Detector]` Track stride multipliers. Highlight inverse pairs in `:`. Animate modular wraparound toward `V-1` completion. (Visual only, no group theory names yet.)
+`[PLACEHOLDER: Hyper-Factor Tree]` Input `V`. Show prime decomposition. Generate `(d!)^2` base permutation pairs. Map to 3D/4D+ box structures.
 
-## 🔗 Notation & Scope Boundaries
-*   **Scope:** Factorial basis labeling, $d$-dimensional boxes, and the `:` twist operator.
-*   **Metaphor:** Base Permutation $\to$ Shared-Place Layering $\to$ Twist Pairing $\to$ Centroid Symmetry $\to$ Modular Wraparound.
-*   **Deferred:** Formal group notation $\text{MG}(V-1)$, wreath products, and the explicit formal name "lattice" are withheld.
+---
 
+### **Puzzle Gate**
+1. **Factorial Mapping:** Place three base permutations into the `|3|2|1|` box. Identify shared base-places and predict extrusion vs pure directions.
+2. **Twist & Layer Identification:** Apply `:` to paired base permutations. Categorize each as pure, mixed (extrusion), or identity. Verify splicing behavior.
+3. **Symmetry Verification:** For `(2,4,5)`, highlight all centroid-involuted cycles. Confirm diagonal fixed points and extruded fixed lines/plane.
+4. **Stride Inversion Pattern:** Track multipliers across `:` pairs. Observe consistent modular inversion. Predict the terminal completion element without naming it.
+5. **Dimensional Scaling:** Compare `(4,10)` and `(2,2,2,5)` box indexes. Verify that all `(4,10)` structures appear as projections/subsets of the prime-decomposed set.
+
+---
+
+### **Notation & Scope Boundaries**
+- **Strictly 3D+ Grounding:** Uses `(d!)^2` combinatorics, factorial box labeling (`α,β,γ`, `↗,↘,e`), and `:` as twist operator.
+- **Deferred Formalism:** `MG(V-1)`, `ℤ_{V-1}^*`, wreath products, and permutahedra are explicitly withheld. Multiplicative structure is presented as observed pattern, not named algebra.
+- **Composition vs Base Labeling:** `e` anchors pipelines; dropped from base permutation labels.
+- **Metaphor Alignment:** All interactions reinforce `base permutation → shared-place layering → twist pairing → centroid symmetry → modular wraparound`.
+
+---
+
+### **Computational Safeguards**
+- **3D/Torus Rendering:** Coiling and centroid inversion capped at `d ≤ 4` for interactive clarity. Higher dimensions use projection trees.
+- **Cycle Enumeration:** Fixed-point detection and symmetry matching use centroid inversion shortcuts to avoid `O(V)` traversal where unnecessary.
+- **Striding Validation:** Autogenerates only valid box indexes. Non-coprime bases or mismatched tallies trigger constructive hints about `MG(V-1)` alignment.
+- **UI Scaling:** Factorial box, twist pairing, and momentum metrics dynamically optimize for `a,b,c ≤ 15` without layout collapse.
+
+---
+
+This specification honors your exact combinatorial rule (`(d!)^2`), notation system (factorial box + `:` twist), 3D walking/tallying mechanics, fixed-point/symmetry constraints, and Terminus preparation (hidden `MG(V-1)` structure, stride inversion, `V-1` completion). 
