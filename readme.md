@@ -1,32 +1,38 @@
-# 🧭 Tutorial Specification: "The Permutation Lattice"
+# **Tutorial Specification: "The Permutation Lattice"**
 
-## 📜 **Intended Use & Overview**
-**NOTE TO IMPLEMENTER:** This document and the subsequent files are not meant to be read sequentially as chapters, but rather are designed to function as a comprehensive **Specification Prompt** for generating a multi-stage, interactive tutorial instance (e.g., a web application, a highly visual document, or an educational software module). The tutorial must guide the student through discovery.
+## **Overview**
+A progressive, interactive exploration of permutation structure, resonance, coordinate geometry, duality, and symmetry. 
+The tutorial prioritizes number-flow intuition, visual pattern discovery, and hands-on manipulation 
+before revealing formal group-theoretic structure. 
 
-**Goal:** To provide a progressive, interactive, and deeply interconnected exploration of permutation structure, coordinate geometry, duality, and symmetry. The journey prioritizes number-flow intuition, visual pattern discovery, and hands-on manipulation *before* revealing formal group-theoretic structure.
+Navigation is gated by puzzle completion. 
 
-**The Core Experience:** The student's path is governed by puzzle completion and builds structural understanding across dimensions. The ultimate goal is to reveal the underlying unifying lattice structure that connects these diverse physical and geometric concepts.
 
-***
+The final layer, **Terminus**, serves as the final reveal with detailed notes on the mathematics that formally mirrors the interactive journey.
+We'll finally relate box indexes to members of the multiplicative group modulo v-1, where v is the box volume, and we'll write MG(v-1) to refer to the group.
+We'll see that adding the terminus "v-1" to MG(v-1) as a fixed point completes the mapping.
+But this must be hidden from the student until Terminus, although this knowledge is useful in preparing the earlier layers.
+The resonance of the progression of Terminus with the progression of the whole tutorial is intentional.
+The key themes of duality and resonance are discovered in the detail of the subject matter.
+The tutorial itself can be seen as dual with its subject matter, 
+and should attempt to "be" resonant with the subject matter, if only for reason of aesthetics and symmetry, 
+but never where that would obscure a simple explanation.
 
-## ✨ **Conceptual Journey & Pedagogy**
-The tutorial is structured as a progressive unveiling of constraints:
+## **Does the title make sense?**
+1.  **Permutations ($S_n$):** The entire tutorial is fundamentally about permutations—the arrangement, composition, and decomposition of indices. $S_n$ (the symmetric group) is the core mathematical object being explored.
+2.  **Lattice:** A lattice, in mathematics, is a partially ordered set where every pair of elements has a unique meet (greatest lower bound) and a unique join (least upper bound).
+    *   The structure of indexes and compositions naturally forms an ordered set.
+    *   The relationships between indices (parent/child relationships via rooting, or shared subsets via the box structure) suggest a complex partial order.
+    *   The concept of $S_n$ itself can be viewed within the lattice of subgroups, reinforcing the terminology.
 
-1.  **Layer 1: Origin (1D)**: Focuses on abstract permutation composition. Teaches how to move objects purely by instruction (displacement) relative to a starting state (identity).
-2.  **Layer 2: The 2D Box (Planar)**: Introduces the first geometric constraint (tallying/folding). Students discover that counting paths in 2D selects a highly constrained subset of all possible permutations—the "box indexes."
-3.  **Layer 3: 3D & Hyper-Boxes (Volumetric)**: Generalizes the spatial constraint to $d$ dimensions. Students discover systematic patterns of shared structure (extrusion layers) and deep symmetries (centroid involution).
-4.  **Layer 4: Terminus (Formalism)**: The culmination. All observed "magic"—the equivalences between radiance and energy, the fixed points, the paired cycles—is formally mapped onto the group structure $\text{MG}(V-1)$ and the permutation lattice.
+A pedantic critique might argue that $S_n$ is technically a group, not exclusively a lattice. However, in educational and applied mathematics contexts, the terminology of "lattice" is often used broadly to describe any system with deep, hierarchical, and overlapping structural dependencies—which perfectly describes the relationship between 1D indexes, 2D box indexes, and $d$-dimensional hyper-boxes. 
+The name thus works as a powerful pedagogical metaphor.
 
-### 💎 **Key Themes & Duality**
-*   **Duality:** The system itself is dual to its subject matter. The *process* of solving the puzzles (e.g., tracking displacement) serves as a physical metaphor for the abstract mathematical structures (e.g., group composition).
-*   **Resonance:** The progression is intended to "resonate" with the subject matter. Insights gained in 1D (linear displacement) must be seen as foundational to 2D (area/tallying) and 3D (volume/coiling), suggesting a single, coherent underlying principle governing all dimensions.
+The "Permutation Lattice" suggests that the entire space of possible indexes (from $S_n$ to the factorially constrained $S_d$) is not a linear progression of topics, but a multi-dimensional, interconnected structure. The tutorial is designed to reveal this lattice by peeling back layers of constraints:
 
-***
+    Layer 1: Constraining the space to 1D (linear permutations $S_n$).
+    Layer 2: Constraining the space via tiling (Box Indexes $\rightarrow$ factoring $V$).
+    Layer 3: Generalizing the tiling structure to higher dimensions (Hyper-Boxes $\rightarrow$ factoring $V$ into $d$ parts).
+    Layer 4: Revealing the algebraic rules (the lattice structure) that govern all these physical and geometric constraints simultaneously.
 
-## 💡 **Conceptual Review: Does the Title Make Sense?**
-**"The Permutation Lattice"**
-This title is intentionally metaphoric and powerful.
-*   **Permutations ($S_n$):** This is the core subject—the arrangement and decomposition of indices.
-*   **Lattice:** While $S_n$ is formally a group, the term "lattice" is used pedagogically to describe the system's deep, hierarchical, and overlapping structural dependencies. The concepts of index composition, shared factors, and generating structures are inherently modeled by a partial ordering system, which the lattice provides.
-
-The name suggests that the entire space of possible indexes is not a simple linear progression, but a complex, multi-dimensional, and interconnected structure that the tutorial systematically maps out layer by layer.
+It suggests that the underlying relationships—such as duality, fixed points, cycle symmetry, and multiplicative inverse—are invariant regardless of the number of dimensions ($d$). The lattice implies that the insights gained in 1D (radiance) are not merely repeated in 2D (energy) but are part of a single, coherent, geometric principle (the generalization of metric distance/invariance).
