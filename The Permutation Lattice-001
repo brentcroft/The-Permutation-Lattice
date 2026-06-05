@@ -1,0 +1,819 @@
+# The Permutation Lattice
+*From identity to multiplicative closure: a progressive journey through the structure of rearrangements*
+
+## Prologue: The Path Ahead
+
+This tutorial is a journey through a single mathematical object viewed from successive perspectives: the permutation, the tallying box, the dimensional extrusion, the translation between concrete and symbolic forms, the algebraic reduction, the formal structure, and finally, the labeling system that ties everything together.
+
+The progression is deliberate. We begin with the most concrete: numbered positions and instructions for rearranging them. We end with the most abstract: a multiplicative group that closes the entire structure. Along the way, the same idea appears and reappears in different guises, each time gaining depth.
+
+The title, *The Permutation Lattice*, signals our destination. A lattice is a structure with multiple, interconnected paths between points. By the end of this journey, you will see that permutations, coordinates, dimensions, and symmetries are not separate topics but facets of a single crystal.
+
+---
+
+## Layer 1: Origin
+
+*The Tortoise's Lesson*
+
+In the old kingdom, six messengers stood in a line, each knowing their position by the number on their tunic: 0, 1, 2, 3, 4, 5. This was their *identity*, the arrangement from which all other arrangements could be measured.
+
+When the king wished to send them on errands in a different order, he did not physically move them immediately. Instead, the court mathematicians would write the new arrangement as a sequence: [3, 1, 4, 0, 5, 2]. This sequence said: the first messenger goes to position 3, the second to position 1, the third to position 4, and so on.
+
+The mathematicians discovered they could compose these instructions. Do one shuffle, then another, calculating the net effect on paper. Only when the final arrangement was determined did they issue the commands. The messengers would rearrange themselves in a single coordinated movement.
+
+The tortoise, watching from the garden wall, observed: "You have learned to walk the path before you take a step. This is how I beat the hare."
+
+### What is an Index?
+
+An **array** is any sequence of non-negative integers. It may contain duplicates, values that exceed its length, or gaps. Arrays are raw numerical objects with no structural requirements.
+
+An **index** is a special kind of array that obeys two strict rules:
+
+1. Every label appears exactly once.
+2. Every label is strictly less than the array length *n*.
+
+Thus, for an array of length 3, the valid indexes are: [0,1,2], [1,2,0], [2,0,1], [0,2,1], [1,0,2], [2,1,0]. These six arrays exhaust all permutations of the set {0, 1, 2}. They are the elements of the symmetric group S₃.
+
+Indices are the only objects that can be meaningfully composed, inverted, or decomposed into cycles. Arrays that violate the rules are mere sequences, useful for computation but not for structure.
+
+### The Identity: Doorway to Reality
+
+The **identity** index e = [0, 1, 2, ..., n-1] is the canonical arrangement. It serves as the bridge between abstract indexes and real-world systems:
+
+- *Jersey numbers:* n players numbered 0 to n-1 in the dressing room. The identity is the opening lineup.
+- *Server racks:* n servers assigned to physical slots. The identity is the factory configuration.
+- *Library shelves:* n books indexed 0 to n-1. The identity is alphabetical order.
+- *Stage positions:* n actors at numbered marks. The identity is the opening pose.
+
+In each case, the identity establishes the correspondence. Permutations become rearrangement instructions. We manipulate the indexes abstractly, compute the net effect, and only then "issue the final displacement" to reorder the physical or logical items.
+
+### Composition as Abstract Manipulation
+
+When we write A \* B, we mean: apply B first, then A. The evaluation rule is:
+
+output[i] = (B \* e)[A[i]]
+
+This pulls the label at position *i* in the new state from position A[i] in the previous state.
+
+The right-to-left pipeline A \* B \* e is evaluated as A \* (B \* e). We begin with the identity e (reality at rest), apply displacement B, then apply displacement A.
+
+The identity serves as the generative baseline: P \* e = P for any permutation P.
+
+### Cycle Decomposition
+
+Every permutation partitions its labels into independent displacement loops, or *cycles*. The identity consists entirely of fixed points, cycles of length 1 where a label remains in its own position. Longer cycles trace the flow of labels through positions.
+
+The **Cycle Stave** is a parallel-track visualization where each cycle occupies its own track. Fixed points rest on a central identity track. Semi-circular arcs connect consecutive labels in a cycle, arching upward if the next position is higher and downward if lower.
+
+### Power Chains and Roots
+
+Repeated composition traces a power chain: P, P², P³, ... until returning to e. The length of this chain is the *order* of P.
+
+Permutations are *roots* of each other: Q is a root of P if Q^k = P for some k ≥ 1. The identity sits at the terminus of all power chains, making every index a generative root of the baseline state.
+
+### Worked Examples: Layer 1
+
+**Example 1: Index Validation**
+
+Classify each array as a valid index or an invalid array:
+
+1. [0, 1, 2, 2]
+2. [0, 1, 3]
+3. [2, 0, 1]
+4. [4, 5, 6]
+5. [0, 1, 2, 4]
+
+*Solutions:*
+
+1. **Invalid:** the label 2 appears twice. To fix, change one 2 to the missing label 3: [0, 1, 2, 3].
+2. **Invalid:** the label 3 is out of range (array length is 3, so valid labels are 0, 1, 2). To fix, change 3 to 2: [0, 1, 2].
+3. **Valid:** it is a permutation of {0, 1, 2}.
+4. **Invalid:** all labels are out of range. To fix, subtract 4 from each: [0, 1, 2].
+5. **Invalid:** the label 4 is out of range (array length is 4). To fix, change 4 to 3: [0, 1, 2, 3].
+
+**Example 2: Pipeline Tracing**
+
+Trace A \* B right-to-left for A = [2, 0, 1] and B = [1, 2, 0].
+
+Compute B \* e:
+- output[0] = e[B[0]] = e[1] = 1
+- output[1] = e[B[1]] = e[2] = 2
+- output[2] = e[B[2]] = e[0] = 0
+- Result: [1, 2, 0]
+
+Compute A \* (B \* e):
+- output[0] = (B\*e)[A[0]] = (B\*e)[2] = 0
+- output[1] = (B\*e)[A[1]] = (B\*e)[0] = 1
+- output[2] = (B\*e)[A[2]] = (B\*e)[1] = 2
+- Result: [0, 1, 2] = e
+
+The composition A \* B equals the identity. This is because A is the inverse of B. They cancel.
+
+**Example 3: Root Exploration in S₃**
+
+All six elements of S₃ and their power chains:
+
+- e = [0, 1, 2]: order 1
+- A = [1, 0, 2] (swap 0,1): A² = e, order 2
+- B = [0, 2, 1] (swap 1,2): B² = e, order 2
+- C = [2, 1, 0] (swap 0,2): C² = e, order 2
+- D = [1, 2, 0] (cycle 0→1→2→0): D² = [2, 0, 1], D³ = e, order 3
+- E = [2, 0, 1] (cycle 0→2→1→0): E² = [1, 2, 0] = D, E³ = e, order 3
+
+The identity anchors the entire structure. Every permutation is a power of itself, and all powers converge to the identity.
+
+---
+
+## Layer 2: The 2D Box
+
+*Two Shepherds, One Flock*
+
+Two shepherds stood on opposite sides of a rectangular pen holding forty sheep. The first counted along the long side: "Five groups of eight, I count five strides of eight." The second counted along the short side: "Eight groups of five, I count eight strides of five."
+
+They were both right. The pen could be read in two directions, and each reading produced a different but valid tally. When the shepherds traced the path of their count on the ground, they drew two spirals that wound through the same set of positions in different orders. The sheep, bemused, watched the patterns form.
+
+The shepherds had discovered, without knowing it, the principle of 2D tallying. The same volume, 40 sheep in a 5×8 grid, can be enumerated by walking in two different orders. The resulting indexes are different permutations, but they are not arbitrary. They are special: they inherit the geometry of the grid, the periodicity of the dimensions, and the symmetry of the rectangle.
+
+### Tallying in Two Directions
+
+Folding a 1D index into 2D reveals two complementary ways to tally the same volume V = a × b.
+
+The tally (a, b) means "a lots of b": stride a along the primary axis, step 1 along the secondary axis, repeat. The place-value table is |a|1|.
+
+The tally (b, a) means "b lots of a": stride b along the primary, step 1 along the secondary, repeat. The place-value table is |b|1|.
+
+Both fill the same a × b box from (0, 0) to (a-1, b-1), but they wind through the coordinates differently.
+
+### Box Indexes: A Selected Subset
+
+In Layer 1, we considered all n! permutations of the identity. In Layer 2, we restrict attention to a highly structured subset: the **box indexes**, those permutations that arise from tallying.
+
+The selection is severe. The number of box indexes for a given volume V grows strictly according to the number of distinct prime factors of V. Specifically, if V has *d* prime factors (counting multiplicity), the number of box indexes is (d!)². All other factor groupings (sub-boxes) are merely selections or projections of this maximal set.
+
+For example, V = 40 = 2 × 2 × 2 × 5. Here d = 4, so the number of box indexes is (4!)² = 576. A sub-box like (4, 10) corresponds to grouping the factors as 4 = 2×2 and 10 = 2×5. The (4, 10) box indexes are a subset of the (2, 2, 2, 5) box indexes.
+
+The growth context is striking:
+
+| Structure | Constraint | n=3 | n=4 | Growth |
+|---|---|---|---|---|
+| Odometer | Values < n | 27 | 256 | n^n |
+| Index | No repeats | 6 | 24 | n! |
+| Box Index | Tallying rule | 2 | 4 | (d!)² |
+
+Box indexes are a vanishingly sparse subset of all indexes, selected entirely by the walking/tallying process.
+
+### Fixed Points and Cycle Symmetries
+
+The round-trip construction imposes strict geometric constraints on box indexes.
+
+*Guaranteed fixed points:*
+- The origin (0, 0)
+- The terminus (a-1, b-1)
+- Every diagonal point (x, x) where x ranges over coordinates present in both dimensions
+
+These points are fixed by the construction itself. They sit unmoved while the rest of the box may transform around them.
+
+*Cycle symmetries:*
+1. **Self-symmetric cycles:** even-order cycles where points occur in opposing pairs. The center of each pair aligns exactly with the center of the box.
+2. **Paired reflections:** two distinct cycles form a mirrored pair. Each point in one cycle aligns with a point in the other such that the midpoint of their connecting line is the box center.
+
+### The Round Trip Operator
+
+A full round trip from origin to terminus and back is denoted by the colon operator `:`. There are four combinations:
+- `↗:↗` (up tally forward + up tally back)
+- `↗:↘` (up tally forward + down tally back)
+- `↘:↗` (down tally forward + up tally back)
+- `↘:↘` (down tally forward + down tally back)
+
+In 2D, base permutations are labeled simply `↗` and `↘`. The identity e is dropped from these labels (it carries no directional information) but is retained on the far right of composition expressions to anchor the pipeline.
+
+The `:` operator is defined as: (P : Q) = P ∘ Q⁻¹, where P is the forward tally and Q is the backward tally. This composition preserves the origin and terminus as fixed points.
+
+### The Torus and the Winding Path
+
+The flat a×b grid is a net of a torus with periods a and b. Tallying traces a straight geodesic on the torus, which appears as a spiral when wrapped.
+
+Imagine the grid as a sheet of paper. Glue the left edge to the right edge (period a), and the top edge to the bottom edge (period b). The result is a torus, a doughnut shape. A straight line on the flat grid becomes a spiral on the torus.
+
+This winding is equivalent to the modular recurrence: c_{k+1} ≡ s · c_k (mod V - 1), where s is the stride product. The torus visualization makes the hidden periodicity tangible.
+
+### Coordinate Magic and Interactive Weights
+
+Extract the (t, u) coordinates for any cycle. Reading t down forms a base-t number; reading u up forms a base-u number. Each cycle position k satisfies:
+
+c_k = W_t × t^k (mod t^L - 1)  
+c_k = W_u × u^(-k) (mod u^L - 1)
+
+where W_t and W_u are integer alignment weights, and L is the cycle length. Throwing away one coordinate dimension retains full cycle information through this dual-base reconstruction.
+
+### Distance Metrics: Radiance and Energy
+
+Two measures of displacement for a cycle:
+
+*1D Radiance:* R(C) = Σ|jump| across all cycle arcs. This is the total absolute distance traveled in one dimension.
+
+*2D Energy:* E(C) = Σ(Δx² + Δy²) across all cycle arcs. This is the squared Euclidean perimeter of the cycle.
+
+*Near-square identity:* For any box (b, b+1), the radiance of every cycle exactly equals its energy. This reveals a deep geometric harmony in adjacent-base tallies.
+
+### Worked Examples: Layer 2
+
+**Example 1: Box Index Folding**
+
+Fold a 1D index into the (3, 2) box using tallies (3, 2) and (2, 3).
+
+For tally (3, 2): walk 3 steps in x, 1 step in y, repeat.
+- Position 0: (0, 0)
+- Position 1: (1, 0)
+- Position 2: (2, 0)
+- Position 3: (0, 1)
+- Position 4: (1, 1)
+- Position 5: (2, 1)
+
+For tally (2, 3): walk 2 steps in x, 1 step in y, repeat.
+- Position 0: (0, 0)
+- Position 1: (1, 0)
+- Position 2: (0, 1)
+- Position 3: (1, 1)
+- Position 4: (0, 2)
+- Position 5: (1, 2)
+
+Both paths visit all six positions, but in different orders.
+
+**Example 2: Symmetry Verification**
+
+For the (4, 4) box with tally (↗:↘), verify the cycle structure.
+
+The center of a 4×4 box is (1.5, 1.5). The point (0, 0) reflects to (3, 3) through this center. The midpoint is ((0+3)/2, (0+3)/2) = (1.5, 1.5). ✓
+
+In the (↗:↘) construction for (4, 4), the diagonal points (0, 0), (1, 1), (2, 2), (3, 3) are all fixed points by construction. The remaining points form 2-cycles: (0, 1) ↔ (3, 2), (0, 2) ↔ (3, 1), (0, 3) ↔ (3, 0), (1, 0) ↔ (2, 3), (1, 2) ↔ (2, 1), (1, 3) ↔ (2, 0).
+
+**Example 3: Weight Discovery**
+
+For the (4, 10) box, consider the 3-cycle: (0,0) → (1,4) → (2,8) → (0,0). The x-coordinates are 0, 1, 2, which are already aligned in base 4 (they are 0, 1, 2 in base 4). So W_x = 1.
+
+The y-coordinates are 0, 4, 8. To reconstruct in base 10, we need W_y × 1 = 4, so W_y = 4. Verify: 4 × 0 = 0, 4 × 1 = 4, 4 × 2 = 8. ✓
+
+**Example 4: Round Trip Comparison**
+
+For the (3, 4) box, trace the four round trips:
+- (↗:↗): forward and backward both stride up. The path retraces itself in reverse.
+- (↗:↘): forward strides up, backward strides down. The paths cross at the origin and terminus.
+- (↘:↗): forward strides down, backward strides up. Mirror image of the above.
+- (↘:↘): forward and backward both stride down. The path retraces itself.
+
+The self-retracing paths (↗:↗) and (↘:↘) are simpler; the cross-winding paths (↗:↘) and (↘:↗) reveal hidden structure by visiting positions in different orders.
+
+---
+
+## Layer 3: 3D and Hyper-Boxes
+
+*The Architect and the Apprentice*
+
+An architect designed a city that could only be built one layer at a time. The first layer was a grid of houses. The second layer was a copy of the first, raised up and connected by stairs. The third layer was another copy, raised higher still.
+
+When the architect drew the plans, he realized something remarkable: each new layer was a magnification of the layer below, and the connections between layers followed the same rules as the connections within a layer. The city was self-similar, a tower of grids.
+
+"We can build in any dimension," the apprentice said. "Four floors, five floors, a hundred floors. The principle is the same."
+
+"And yet," the architect replied, "each floor adds something new. The structure changes as we climb. The same rules apply, but the geometry grows."
+
+### Factorial Box and Base Permutation Labeling
+
+Base permutations are labeled using a truncated factorial box that expands leftward with dimension:
+- 2D Box: |2|1| → columns ↗, e and ↘
+- 3D Box: |3|2|1| → columns α, β, γ and ↗, ↘, e
+
+Each column maps a stride dimension to a base permutation. Expressions combine forward/reverse tallies with base directions:
+- 2D: `↗:↘ * ↘:↗ = e`
+- 3D: `α↗:β↘ * γ↘:α↗`
+
+The identity e is dropped from base permutation labels (it carries no directional stride) but remains on the far right of composition pipelines to anchor the identity.
+
+### 3D Walking and Torus Coiling
+
+The walking mechanism extends identically to 2D: stride through each dimension according to the base permutation, then apply the twist `:` to pair forward and reverse tallies.
+
+The flat a×b×c grid snaps and coils into a 3-torus. Tallying traces a triple-helical path across three coupled periodic axes. The `:` operator pairs the forward helix with its reverse, creating a closed winding loop.
+
+### Shared Base-Places and Extrusion Layers
+
+When pairing base permutations with `:`, three structural cases emerge:
+
+*Pure directions* (no shared base-places): strides operate independently across axes. The resulting index is a product of independent permutations.
+
+*Identities* (all base-places shared): the forward and reverse tallies exactly cancel, yielding the identity index.
+
+*Extrusions* (exactly one base-place shared): this automatically extrudes a lower-dimensional index into the new dimension. Visually, this manifests as copying and magnifying a 2D index along the new axis, with labels scaled and spliced into the gaps.
+
+### Fixed Points and Centroid Symmetries
+
+The twist `:` operator imposes strict geometric constraints in 3D+:
+
+*Guaranteed fixed points:*
+- The main diagonal (x, x, x, ...) is always fixed.
+- Extruded faces contribute lines or planes of fixed points extending along the new dimensions.
+- The origin (0, 0, ..., 0) and terminus (a-1, b-1, ..., c-1) remain fixed as tallying endpoints.
+
+*Centroid involutions:* All cycle symmetries are involutions through the box centroid. The centroid of a d-dimensional box is the point whose j-th coordinate is (b_j - 1)/2. Cycles either:
+- Are self-symmetric (opposing points aligned on the centroid), or
+- Form mirrored pairs where every point's reflection through the centroid lands on the paired cycle.
+
+### Hidden Multiplicative Structure
+
+Because every base b_j divides V, each b_j is coprime to V - 1. This places them in the multiplicative group MG(V - 1) = {x ∈ ℤ_{V-1} : gcd(x, V-1) = 1}.
+
+The stride product s acts as a multiplier within this group. Pairs under `:` consistently map to mutual inverses in MG(V - 1). Cycle closure always points toward a final element that completes the multiplicative set, a structural completion revealed fully in Terminus.
+
+This pattern emerges visually as consistent stride inversion and periodic wraparound across all dimensions.
+
+### Distance and Symmetry Metrics
+
+Distance measures generalize with dimension:
+- *1D Radiance:* Σ|jump|
+- *2D Energy:* Σ(Δx² + Δy²)
+- *3D Momentum:* Σ(Δx² + Δy² + Δz²)
+
+For any prime-factor box, the stride multipliers maintain constant product relationships across layers, preserving momentum scaling under dimension expansion.
+
+### Worked Examples: Layer 3
+
+**Example 1: Twist Layer Identification**
+
+Apply `:` to the pair (α↗ : β↘) in a (2, 3, 5) box.
+
+Here α and β are distinct base-places (referring to the 2-factor and 3-factor respectively), and γ is not involved. Since no base-place is shared between the forward and reverse, this is a pure direction. The resulting index acts independently on the 2-axis and 3-axis, leaving the 5-axis as identity.
+
+Apply `:` to (α↗ : α↘). Both permutations reference the α base-place. This is an identity case: the forward and reverse cancel, yielding the index e.
+
+Apply `:` to (α↗ : γ↘) where only α is shared between the two permutations. Wait, that is no shared base-place. Correction: (α↗ : β↘) shares no base-places (pure). (α↗ : α↘) shares one base-place (extrusion). (α↗ : α↘) with all shared gives identity.
+
+**Example 2: Stride Inversion**
+
+For the box (2, 3) with V = 6, the stride for (↗:↘) is 2 × 3 = 6. Modulo V - 1 = 5, we have 6 ≡ 1 (mod 5). The inverse of 1 modulo 5 is 1. So the stride is its own inverse.
+
+For the box (2, 5) with V = 10, the stride for (↗:↘) is 2 × 5 = 10. Modulo V - 1 = 9, we have 10 ≡ 1 (mod 9). Again, the stride is its own inverse modulo V - 1.
+
+This is a general pattern: the stride product s satisfies s ≡ 1 (mod V - 1) when the product of the bases equals V.
+
+**Example 3: Symmetry Verification**
+
+For a (2, 4, 5) box (V = 40), verify that the main diagonal consists of fixed points.
+
+The diagonal points are (0, 0, 0), (1, 1, 1), (2, 2, 2), (3, 3, 3), (4, 4, 4) — all points where all three coordinates are equal. For these points to be fixed, the tallying map must send (x, x, x) to (x, x, x).
+
+By construction, the `:` operator preserves the main diagonal. The forward tally and reverse tally both fix diagonal points, so their composition also fixes them.
+
+---
+
+## Layer 3a: Concrete and Symbolic Expressions
+
+*The Diplomat's Dictionary*
+
+A traveller arrived at a city where some merchants measured in cubits and others in spans. A cubit was three spans. The traveller needed to buy cloth, and one merchant quoted "three cubits and two spans." The customs officer translated: "eleven spans." But then another merchant quoted the same cloth as "two cubits and five spans," and the translation became "eleven spans" again.
+
+The traveller learned that the same length could be named in different ways, and the translation was always exact. There was a dictionary, and the dictionary was the key.
+
+In our context, the "merchants" are the concrete and symbolic ways of writing box indexes. The concrete way names the dimensions by their physical sizes (2, 3, 5). The symbolic way names them by their algebraic roles (α, β, γ). The dictionary is the Box Declaration.
+
+### The Box Declaration Context
+
+Every box operation exists within a **Box Declaration**: an ordered list of the volume's factors. For example, V = 2 × 3 × 5 gives the declaration (2, 3, 5).
+
+The declaration serves as the dictionary that translates concrete values to symbolic axes:
+- 2 → α (the first factor)
+- 3 → β (the second factor)
+- 5 → γ (the third factor)
+
+Concrete expressions are invalid without a declared context. The expression ((2:3)|5) is ambiguous if we don't know which factor is which. With the declaration (2, 3, 5), the 2 maps to α and the 3 maps to β.
+
+Symbolic expressions are universal. α:β means "the first and second factors, whatever they are." This is the power of abstraction.
+
+### Conditional Subscripts
+
+In the box (2, 2, 5), which 2 is which? The factor 2 appears twice, so we need to disambiguate.
+
+*Rule:*
+- Unique values get no subscript: 5.
+- Repeated values get subscripts: 2₀, 2₁.
+- If one instance of a repeated value has a subscript, all must.
+
+So in the box (2, 2, 5), we write 2₀ and 2₁. The declaration maps:
+- 2₀ → α
+- 2₁ → β
+- 5 → γ
+
+An expression like ((2:2)|5) is invalid for this box — it uses the bare "2" twice without subscripts. The correct form is ((2₀:2₁)|5).
+
+### The Rosetta Translation
+
+*Concrete → Symbolic:*
+1. Parse factors (e.g., 2₁).
+2. Look up index in declaration (e.g., the 2nd factor).
+3. Assign Greek (e.g., β).
+4. Assign Arrow: 1st in pair gets ↗, 2nd gets ↘.
+
+*Symbolic → Concrete:*
+1. Parse Greek (e.g., β).
+2. Look up factor in declaration (e.g., 2nd factor → 2).
+3. Apply subscript (if 2 repeats, assign instance based on usage history).
+
+### The Slide Operator
+
+The `|` operator extrudes a 2D index into a higher dimension.
+
+*Concrete view:* ((A:B)|C) means "build a plane with A and B, then stack layers of C."
+
+*Symbolic view:* The extrusion is implicit in the Greek assignment. α↗:β↘ assumes extrusion along remaining axes (γ, δ, ...).
+
+*Handedness:*
+- Right slide ((A:B)|C): standard orientation.
+- Left slide (C|(A:B)): conjugated orientation, which swaps arrows and Greek positions.
+
+### Worked Examples: Layer 3a
+
+**Example 1: Subscript Detective**
+
+Given box (2, 2, 5), fix the invalid expression ((2:2)|5).
+
+The factor 2 appears twice in the box, so both instances need subscripts. The corrected expression is ((2₀:2₁)|5).
+
+The symbolic translation: 2₀ → α, 2₁ → β, 5 → γ. So the symbolic form is α↗:β↘ (extruded along γ).
+
+**Example 2: Context Switch**
+
+Take the symbolic expression α↗:β↘. Translate it to concrete for two different boxes.
+
+Box (2, 3, 5):
+- α → 2, β → 3
+- Concrete: (2:3)
+
+Box (3, 2, 5):
+- α → 3, β → 2
+- Concrete: (3:2)
+
+The symbolic form stays the same; the concrete form changes because the declaration has reordered the factors.
+
+**Example 3: Ambiguity Challenge**
+
+Given box (2, 2, 2), construct three distinct concrete expressions that map to three distinct symbolic forms.
+
+The box (2, 2, 2) has d = 3 factors, all equal to 2. The mapping is:
+- 2₀ → α, 2₁ → β, 2₂ → γ
+
+Three distinct concrete expressions:
+1. ((2₀:2₁)|2₂) → α↗:β↘ (extruded along γ)
+2. ((2₀:2₂)|2₁) → α↗:γ↘ (extruded along β)
+3. ((2₁:2₂)|2₀) → β↗:γ↘ (extruded along α)
+
+These are three different indexes, because the `:` operator pairs different dimensions.
+
+**Example 4: Slide Orientation**
+
+Compare ((2:3)|5) and (5|(2:3)) for the box (2, 3, 5).
+
+((2:3)|5): right slide. The 2:3 twist is on the "inner" plane, extruded along 5.
+- Symbolic: α↗:β↘ (extruded γ)
+
+(5|(2:3)): left slide. The 5 is the "inner" layer, with the 2:3 twist on the "outer."
+- Symbolic: γ↗:α↘ or γ↗:β↘ depending on convention; the left slide effectively rotates which axis is treated as the extrusion direction.
+
+---
+
+## Layer 3b: Hyper-Boxes and Algebraic Closure
+
+*The Folding Tower*
+
+A mathematician was given a sheet of paper and told to fold it as many times as possible. With the first fold, the paper became a rectangle. With the second, it became a smaller rectangle. With the third, smaller still. After many folds, the paper was a thick square, and the mathematician realized that each fold had followed a rule.
+
+Folding the top edge to the left was not the same as folding the top edge to the right. The order of folds mattered, and the paper remembered every fold. When the mathematician unfolded the paper, the creases formed a pattern that revealed the history of every fold.
+
+"It's a record," she said. "Each fold is a transformation, and the creases are the proof that the transformation was applied. The pattern on the unfolded paper encodes every operation."
+
+### Iterative Extrusion
+
+Any d-dimensional box index is built by nesting 2D twists:
+- 2D: (A:B)
+- 3D: ((A:B)|C)
+- 4D: (((A:B)|C)|D)
+
+*Symbolic:* α↗:β↘ is a 2D twist embedded in d-space (identity on other axes).
+
+*Completeness:* Any box index can be formed by composing these elementary extruded twists. This is a constructive theorem: the set of all extruded twists generates the entire set of box indexes.
+
+### Reduction Rules: The Algebraic Magic
+
+Three rules allow complex expressions to collapse:
+
+*Rule 1: Identity Annihilation (Telescoping)*  
+X:Y \* Y:Z = X:Z  
+Intermediate terms cancel. Long chains collapse.
+
+*Rule 2: Dual Inversion*  
+(A↗:B↘)⁻¹ = B↗:A↘  
+Swapping order in concrete (or swapping arrows in symbolic) creates the inverse.
+
+*Rule 3: Cycle Closure*  
+P_xy \* P_yz \* P_zx ≈ e  
+Traversing all three dimensional perspectives returns to the identity.
+
+### Symmetry and the Wreath Product
+
+The symmetry group acting on box indexes is: G_d ≅ S_d ⋉ ℤ₂^d
+
+- S_d permutes the base dimensions (swapping which factor is "first," "second," etc.).
+- ℤ₂^d applies component-wise involution x_j ↦ b_j - 1 - x_j (reflecting through the center of each dimension).
+
+*Concrete:* The `|` operator permutes dimensions (S_d action).
+
+*Abstract:* The ↗/↘ arrows apply inversions (ℤ₂^d action).
+
+*Repeated bases:* Swapping identical factors (e.g., 2₀ ↔ 2₁) is an automorphism, a structural symmetry that does not change the index, only its label.
+
+### Worked Examples: Layer 3b
+
+**Example 1: Telescoping**
+
+Simplify α↗:β↘ \* β↗:γ↘ \* γ↗:α↘.
+
+Apply Rule 1 (telescoping) to the first two terms:
+α↗:β↘ \* β↗:γ↘ = α↗:γ↘
+
+Now we have α↗:γ↘ \* γ↗:α↘. Apply Rule 1 again:
+α↗:γ↘ \* γ↗:α↘ = α↗:α↘ = e (the identity)
+
+So the chain collapses to the identity.
+
+**Example 2: Inverse Hunt**
+
+Given the concrete expression ((2₀:2₁)|5) for the box (2, 2, 5), construct its inverse.
+
+First, translate to symbolic: α↗:β↘ (extruded γ).
+
+Apply Rule 2 (dual inversion): the inverse is β↗:α↘ (extruded γ).
+
+Translate back to concrete: ((2₁:2₀)|5).
+
+**Example 3: Cycle Closure**
+
+Verify the cycle closure property for the box (2, 3, 5).
+
+The three pairwise twists are:
+- P_xy = α↗:β↘ (on the 2-3 plane)
+- P_yz = β↗:γ↘ (on the 3-5 plane)
+- P_zx = γ↗:α↘ (on the 5-2 plane)
+
+Compute P_xy \* P_yz:
+- α↗:β↘ \* β↗:γ↘ = α↗:γ↘
+
+Now multiply by P_zx:
+- α↗:γ↘ \* γ↗:α↘ = α↗:α↘ = e
+
+So P_xy \* P_yz \* P_zx = e. The closure is verified.
+
+**Example 4: Hyper-Construction**
+
+Build a 4D index using nested extrusions.
+
+For a 4D box (2, 3, 5, 7) with V = 210:
+- 2D base: (2:3)
+- 3D: ((2:3)|5)
+- 4D: (((2:3)|5)|7)
+
+Symbolic: (((α↗:β↘)|γ)|δ), or with extrusion implicit, (α↗:β↘) extruded along γ and δ.
+
+---
+
+## Layer 4: Terminus
+
+*The Final Door*
+
+At the end of the road stood a door. Travellers had passed it for centuries without noticing. It was not locked; it had no handle.
+
+One day, a traveller who had walked the entire road finally paused before it. She looked at the path she had travelled: from the identity, through the counting boxes, through the layers and translations, through the algebraic reductions. She realized that the path was not a line but a spiral, and the door was the point where the spiral completed itself.
+
+She had been walking back to the beginning all along, but now she could see the whole shape. She stepped through the door, and found herself standing at the starting point, but the starting point was different now. It was the same, and it was complete.
+
+The door is the Terminus. The road is the journey from abstract index to concrete tally, from concrete tally to symbolic algebra, from symbolic algebra to multiplicative closure. The Terminus is where we see that all these paths are one path, and the closure is complete.
+
+### Algebraic Foundations
+
+*Indexes as the Symmetric Group*  
+Let S_n denote the symmetric group on n labels. An index is precisely an element P ∈ S_n satisfying:
+- P: {0, 1, ..., n-1} → {0, 1, ..., n-1} is bijective
+- P(i) ∈ {0, ..., n-1} for all i
+
+Arrays that violate bijectivity are elements of the full transformation monoid T_n, not S_n. Only S_n admits well-defined composition, inversion, and cycle decomposition.
+
+*Composition as Function Application*  
+For A, B ∈ S_n, composition is: (A ∘ B)(i) = A(B(i))  
+The default right-to-left pipeline A \* B \* e evaluates as A ∘ (B ∘ e), where e is the identity e(i) = i.
+
+*Cycle Decomposition and Order*  
+Every P ∈ S_n decomposes uniquely into disjoint cycles C_1, C_2, ..., C_k.  
+The order of P is: ord(P) = lcm(|C_1|, |C_2|, ..., |C_k|)  
+The radiance metric R(P) = Σ|P(i) - i| is the shortest 1D displacement proxy on the Cayley graph of S_n under adjacent transpositions.
+
+### Coordinate Geometry and Tallying
+
+*Box Factorization and Tallying Maps*  
+A d-dimensional box of volume V corresponds to an ordered factorization V = ∏_{j=1}^d b_j with b_j ≥ 2. Each factorization defines a place-value basis |b_1|b_2|...|b_d|.
+
+The tallying map T: ℤ_V → ℤ_V is a linear congruential generator:  
+T(x) ≡ s · x (mod V - 1)  
+where s = ∏_{j=1}^d b_j^{perm(j)} is the stride product determined by the base permutation.
+
+*The Twist Operator*  
+The twist `:` is defined as: (P : Q) ≡ P ∘ Q⁻¹  
+For any base factorization, there are d! forward tallies and d! backward tallies, yielding (d!)² distinct twist pairs.
+
+The `:` operator enforces boundary consistency: (P:Q)(0) = 0 and (P:Q)(V-1) = V-1 by construction.
+
+*Fixed Points and Centroid Involution*  
+The origin (0, ..., 0), terminus (b_1-1, ..., b_d-1), and all diagonal points (x, ..., x) are fixed under `:`.  
+Define ι(x) = (b_1-1 - x_1, ..., b_d-1 - x_d). Box indexes are invariant under ι or form ι-paired cycles.
+
+*Energy Metric*  
+E(C) = Σ_{(u,v) ∈ C} ||u - v||₂²  
+For adjacent-base boxes (b, b+1), E(C) = R(C) identically due to metric isomorphism on the grid boundary.
+
+### Polyhedral Symmetry and Hyper-Dimensional Structure
+
+*Factorial Box and Base Permutation Labeling*  
+Base permutations are elements of S_d, indexed by a truncated factorial basis (d, d-1, ..., 1). The space of base permutations forms the permutahedron Perm_d ⊂ ℝ^d.
+
+*Shared Base-Places and Extrusion*  
+Let P, Q ∈ S_d. Let k = |{i ∈ {1, ..., d} : P(i) = Q(i)}| be the number of shared base-places.
+- k = d: (P:Q) = e (identity)
+- k = 0: pure directional extrusion
+- k = 1: dimensional extrusion
+
+*Symmetry Group Structure*  
+The symmetry group is the wreath product: G_d ≅ S_d ⋉ ℤ₂^d  
+- S_d permutes base dimensions
+- ℤ₂^d applies component-wise involution
+
+### The Multiplicative Completion
+
+*Stride in MG(V-1)*  
+Since every base b_j divides V, gcd(b_j, V-1) = 1. Thus every base stride lies in the multiplicative group:  
+MG(V-1) ≡ ℤ_{V-1}* = {x ∈ ℤ_{V-1} : gcd(x, V-1) = 1}
+
+The stride product s generates a cyclic subgroup ⟨s⟩ ≤ MG(V-1). The winding path on the box grid is the projection of the multiplicative orbit onto the additive lattice ℤ_V.
+
+*The V-1 Boundary and Structural Closure*  
+The index domain is ℤ_V = {0, 1, ..., V-1}. The tallying map covers {1, ..., V-1} under multiplication by s, but cannot map to 0 multiplicatively (since 0 is not in ℤ_{V-1}*).
+
+The element V-1 serves as the additive boundary that closes the torsor:
+- x ↦ s · x (mod V-1) cycles through ℤ_{V-1}*
+- V-1 is the fixed completion element: (P:Q)(V-1) = V-1
+
+Adding V-1 to MG(V-1) extends the multiplicative action to the full index set, completing the mapping: ℤ_V ≅ ⟨s⟩ ∪ {V-1}
+
+The twist `:` ensures s · s⁻¹ ≡ 1 (mod V-1), forcing cycle closure exactly at the boundary.
+
+*Polynomial Duality Theorem*  
+For any cycle C and any coordinate projection j:  
+c_k^{(j)} ≡ W_j · b_j^k (mod b_j^{L_j} - 1)  
+where W_j is an alignment weight, L_j is the cycle length in dimension j, and b_j is the base stride.
+
+The full state is recoverable via the Chinese Remainder Theorem across dimensions.
+
+### Pedagogical Mapping
+
+| Interactive Concept | Formal Structure |
+|---|---|
+| Index / Identity | S_n / e ∈ S_n |
+| Cycle Stave | Disjoint cycle decomposition in S_n |
+| Radiance / Energy / Momentum | ℓ₁, ℓ₂, ℓ_d graph metrics on Perm_d |
+| Tallying Box (a, b, ...) | Basis factorization V = ∏b_j and place-value map |
+| Twist : | Composition P ∘ Q⁻¹ on S_d |
+| Centroid Symmetry | Involution ι(x) = b - 1 - x in ℤ_{b_j} |
+| MG(V-1) Stride | Multiplicative action in ℤ_{V-1}* |
+| Factorial Box | Permutahedron Perm_d and wreath product S_d ⋉ ℤ₂^d |
+| V-1 Fixed Point | Additive boundary completing torsor closure |
+
+### Worked Examples: Layer 4
+
+**Example 1: Multiplicative Group Computation**
+
+For V = 6 (box (2, 3)), compute MG(V-1) = MG(5) = ℤ₅*.
+
+The elements of ℤ₅* are {1, 2, 3, 4} (all nonzero residues mod 5).
+
+The strides are:
+- For tally (↗:↗): s = 2 × 3 = 6 ≡ 1 (mod 5)
+- For tally (↗:↘): s = 2 × 3 = 6 ≡ 1 (mod 5)
+- For tally (↘:↗): s = 3 × 2 = 6 ≡ 1 (mod 5)
+- For tally (↘:↘): s = 3 × 2 = 6 ≡ 1 (mod 5)
+
+All strides are congruent to 1 modulo V-1. This means the forward and reverse tallies are inverses of each other modulo V-1, ensuring cycle closure.
+
+**Example 2: V-1 Boundary**
+
+For V = 10 (box (2, 5)), identify the V-1 element and its role.
+
+V - 1 = 9. In the tallying map, 9 ≡ -1 (mod 10). The point 9 in the index domain is the additive inverse of 1.
+
+The stride s = 2 × 5 = 10 ≡ 0 (mod 10), but s = 10 ≡ 1 (mod 9). So modulo V - 1, the stride is 1.
+
+The element 9 (V-1) is fixed by the `:` construction. It is the "completion" element that closes the torsor: the multiplicative group MG(9) = {1, 2, 4, 5, 7, 8} acts on {1, 2, ..., 8}, and the element 9 is added to complete the set {0, 1, ..., 9}.
+
+**Example 3: Polynomial Reconstruction**
+
+For the box (4, 10) and a cycle with x-coordinates {0, 1, 2, 3, 0, 1, 2, 3, ...}, the base is 4 and the cycle length L = 4 (in the x-dimension).
+
+The x-coordinate at position k is c_k^{(x)} = k mod 4.
+
+To reconstruct in base 4: W_x × 4^k (mod 4^4 - 1) = W_x × 4^k (mod 255).
+
+We need W_x × 1 ≡ 1 (mod 255), so W_x = 1.
+
+Verify: 1 × 4^0 = 1 ≡ 1 (mod 255), 1 × 4^1 = 4 ≡ 4 (mod 255), etc. The base-4 digits are 0, 1, 2, 3, which is just the number k in base 4.
+
+**Example 4: Wreath Product Structure**
+
+For d = 3, the symmetry group is G_3 ≅ S_3 ⋉ ℤ₂³.
+
+|S_3| = 6 (permutations of 3 elements).  
+|ℤ₂³| = 8 (each dimension can be reflected or not).  
+|G_3| = 6 × 8 = 48.
+
+The S_3 part permutes which factor is α, β, γ. The ℤ₂³ part decides, for each factor, whether to reflect (↗ vs ↘).
+
+For a 3D box, there are 48 symmetry operations. These are the automorphisms of the box structure.
+
+---
+
+## Appendix: The Labelling System
+
+*The Universal Dictionary*
+
+This appendix consolidates the labelling system used throughout the tutorial. It is a reference for translating between the concrete (geometric) and symbolic (algebraic) descriptions of box indexes.
+
+### Two Languages
+
+*Concrete Expressions (Geometric Construction)*
+- Domain: dimensional factors of the box volume (e.g., 2, 4, 5)
+- Syntax: (A:B), |, \*
+- Context: requires a Box Declaration to resolve ambiguity
+- Semantic: describes how the box index is constructed from physical dimensions
+
+*Abstract Expressions (Factorial Coordinates)*
+- Domain: factorial box coordinates (|d|...|1|) and directional arrows
+- Syntax: Greek + Arrow (e.g., α↗) combined with :
+- Context: context-independent
+- Semantic: describes the algebraic structure of the permutation
+
+### Operators
+
+| Operator | Concrete | Abstract | Formal Definition |
+|---|---|---|---|
+| Twist | : (in parens) | : | A ∘ B⁻¹ |
+| Slide | \| | (implicit) | Wreath product conjugation |
+| Compose | \* | \* | Group multiplication |
+| Identity | e (implicit) | e | Identity element of S_V |
+
+### Algebraic Laws
+
+*Identity Annihilation (Telescoping):*  
+X:Y \* Y:Z = X:Z
+
+*Dual Inversion:*  
+(A↗:B↘)⁻¹ = B↗:A↘
+
+*Cycle Closure (Triple Product):*  
+P_xy \* P_yz \* P_zx ≈ e
+
+*Paired Rotations (Conjugate Commutation):*  
+Under specific symmetry conditions, sub-expressions can be rotated if they represent cycle closures.
+
+### Hyper-Box Generalization
+
+*Iterative Extrusion:*
+- 2D: (A:B)
+- 3D: ((A:B)|C)
+- 4D: (((A:B)|C)|D)
+
+*Universal Construction:*  
+The set of all elementary extruded twists generates the group of box indexes. Any box index can be represented as a product of these generators.
+
+*Factorial Basis Scaling:*  
+d dimensions → factorial box |d|d-1|...|1| with labels α, β, γ, δ, ε, ...
+
+The symmetry scales as the wreath product S_d ⋉ ℤ₂^d.
+
+### Tutorial Integration
+
+- Layer 1: Numeric shortcut, identity, 1D composition
+- Layer 2: Concrete (A:B), twist :, 2D geometry
+- Layer 3a: Concrete vs abstract duality, subscripts, Rosetta translation
+- Layer 3b: Hyper-boxes, reduction rules, algebraic closure
+- Layer 4 (Terminus): Formal group theory (S_n, MG(V-1), wreath product)
+- Layer 5 (Appendix): This reference
+
+---
+
+*End of tutorial*
+
+The journey from the identity [0, 1, 2, ...] to the multiplicative closure MG(V-1) is not a sequence of isolated topics. It is a single mathematical object viewed through successive lenses: the permutation, the tally, the dimension, the symbol, the reduction, the group. Each layer reveals a facet of the same crystal. The Permutation Lattice is not a lattice of permutations — it is the lattice that permutations, when constrained by geometry, inevitably become.
