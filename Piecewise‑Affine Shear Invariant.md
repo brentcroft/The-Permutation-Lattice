@@ -1,7 +1,4 @@
 **The Piecewise‑Affine Shear Invariant for Near‑Square Lexicographical Lattices**  
-*(A self‑contained exposition based on the note at*  
-<https://github.com/brentcroft/The-Permutation-Lattice/blob/main/Theorem%20-%20The%20Piecewise-Affine%20Shear%20Invariant%20of%20Near-Square%20Lexicographical%20Lattices.md>*)
-
 ---
 
 ### 1.  Why look at a permutation defined by a geometric shear?
