@@ -87,7 +87,7 @@ The twist of `A` and `B`, written `A : B` using the twist operator `:`, is defin
 ## Products
 The product lets us build a larger, structured index from two smaller ones by using one index to order whole blocks and the other to order elements within each block, so the two component indexes remain independent.
 
-The product of `A_m` and `B_n`, written `A_m ~ B_n`, is the index `C` of size `m * n`.
+The product of `A_m` and `B_n`, written `A_m ~ B_n`, is an index `C` of size `m * n`.
 
 Notionally, this product comprises `m` copies of `B_n`, with values scaled by `n`, distributed across `A_m`.
 
